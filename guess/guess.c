@@ -1,4 +1,6 @@
+#include <string.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -11,9 +13,32 @@ int generateRandomNumber(void){
 
 int getNumber(void){
     printf("Give some number.\n");
-    int value;
-    scanf("%d", &value);
-    //printf("Your number was %d\n", value);
+    int value = 1;
+    int chars = 0;
+    int i = 0;
+    char input_string[100];
+    scanf("%s", input_string);
+    //int string_size = (int)strlen(input_string);
+
+    printf("String was %s\n and size was %zu\n", input_string, strlen(input_string));
+
+    for(i=0; i<strlen(input_string); i++){
+        chars++;
+    }
+    if (chars > 3){
+        printf("Too many characters!\n");
+        return 0;
+    }
+    for(i=0; i<chars; i++){
+        char a = input_string[i];
+        
+        if (!isdigit(a)){
+            printf("Not a valid number!\n");
+            return 0;
+        }
+    }
+    value = atoi(input_string);    
+    printf("Value as an integer: %d\n", value);
     return value;
 }
 
